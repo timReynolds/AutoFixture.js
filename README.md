@@ -80,11 +80,13 @@ var myObj = fixture.create({prop1:'a string', prop2: 1.234, prop3: true});
 /*
 myObj will look something like the following: 
 {
-  prop1: '21032407-9216-404A-9F6A-021E8766AF21',
+  prop1: 'prop121032407-9216-404A-9F6A-021E8766AF21',
   prop2: 0.2518655981465,
   prop3: true
 }
-Each of the property values would be randomly chosen
-from the set of allowable values.
+Each of the property values would be randomly chosen from the set of 
+allowable values. In the case of properties that have strings as values
+the string will be prefixed by the property name to allow the values to
+be easily distinguishable.
 */
 ```
