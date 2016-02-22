@@ -68,6 +68,8 @@ var myBoolean = fixture.create(Boolean);
 
 ## Object Creation
 
+### Creation From a Like Object
+
 In JavaScript we frequently use objects and object literals and care not whether the object was
 created with a constructor function. AutoFixture.js handles this by using a provided object as
 a template, or specimen, for the object to be created.
@@ -84,9 +86,36 @@ myObj will look something like the following:
   prop2: 0.2518655981465,
   prop3: true
 }
-Each of the property values would be randomly chosen from the set of 
-allowable values. In the case of properties that have strings as values
-the string will be prefixed by the property name to allow the values to
-be easily distinguishable.
 */
 ```
+Each of the property values are randomly chosen from the set of allowable values. In the case of
+properties that are of type string the string value will be prefixed by the property name to 
+allow the values to be easily distinguishable.
+
+### Creation From a Constructor Function
+
+Just as the builtin constructor functions can be used to create strings, numbers, and booleans,
+custom constructor functions can be used to create other objects.
+
+```javascript
+function MyObjectType() {
+    this.prop1 = '';
+    this.prop2 = '';
+    this.prop3 = 0;
+    this.prop4 = false;
+}
+var myObj = fixture.create(MyObjectType);
+/*
+myObj will look something like the following:
+{
+  prop1: 'prop121032407-9216-404A-9F6A-021E8766AF21',
+  prop2: 'prop27237F916-AAB4-40CF-814E-8BEC7181A70C',
+  prop2: 0.98712634589712,
+  prop3: true
+}
+*/
+```
+
+As with Like-Object creation described above, the instance values are assigned based on their
+respective property types. Because `prop` and `prop2` are strings, they were assigned random
+values prefixed by the property name.
