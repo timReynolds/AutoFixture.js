@@ -1,4 +1,6 @@
-import ISpecimen, { ISpecimenConstructor } from "./ISpecimen";
+import ISpecimen, { ISpecimenConstructor } from "../ISpecimen";
+import IObjectBuilder from "../IObjectBuilder";
+
 import PrefixedStringSpecimen from "./PrefixedStringSpecimen";
 import StringConstructorSpecimen from "./StringConstructorSpecimen";
 import NumberConstructorSpecimen from "./NumberConstructorSpecimen";
@@ -8,17 +10,15 @@ import ObjectConstructorSpecimen from "./ObjectConstructorSpecimen";
 import FactoryFunctionSpecimen from "./FactoryFunctionSpecimen";
 import ObjectSpecimen from "./ObjectSpecimen";
 
-//TODO: Work out how this would work
 function specimenFactory<T>(
-  specimen: ISpecimenConstructor<T>,
+  Specimen: ISpecimenConstructor<T>,
   objectBuilderFactory: () => any
 ): ISpecimen<T> {
-  return new specimen(objectBuilderFactory);
+  return new Specimen(objectBuilderFactory);
 }
 
-export default (objectBuilderFactory: () => any) =>
+export default (objectBuilderFactory: () => IObjectBuilder) =>
   [
-    //TODO: Move this function
     PrefixedStringSpecimen,
     StringConstructorSpecimen,
     NumberConstructorSpecimen,

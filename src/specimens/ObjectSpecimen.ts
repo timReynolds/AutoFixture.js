@@ -1,4 +1,4 @@
-import ISpecimen from "./ISpecimen";
+import ISpecimen from "../ISpecimen";
 
 export default class ObjectSpecimen<T> implements ISpecimen<T> {
   private _builderFactory: any;

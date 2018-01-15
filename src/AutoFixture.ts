@@ -1,6 +1,6 @@
 ﻿import IAutoFixture from "./IAutoFixture";
 import IObjectBuilder from "./IObjectBuilder";
-import ISpecimen from "./specimens/ISpecimen";
+import ISpecimen from "./ISpecimen";
 
 import specimensFactory from "./specimens";
 import ObjectBuilder from "./ObjectBuilder";

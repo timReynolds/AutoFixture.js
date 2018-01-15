@@ -1,4 +1,4 @@
-import ISpecimen from "./ISpecimen";
+import ISpecimen from "../ISpecimen";
 import { ctorRegex, isConstructorFunctionRx } from "../regex";
 
 const getName = function(typeInfo: any) {

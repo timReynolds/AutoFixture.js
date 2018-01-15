@@ -1,6 +1,6 @@
 export type likenessCreator = Object | Function;
 
-export default interface IObjectBuilder<T> {
+export default interface IObjectBuilder {
   create: () => { [index: string]: any }; //TODO: this should be T
   like: (creator: likenessCreator) => void;
   without: (propName: string) => void;

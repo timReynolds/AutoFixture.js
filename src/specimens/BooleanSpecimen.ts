@@ -1,4 +1,4 @@
-import ISpecimen from "./ISpecimen";
+import ISpecimen from "../ISpecimen";
 
 export default class BooleanSpecimen implements ISpecimen<Boolean> {
   public handles(typeInfo: any) {

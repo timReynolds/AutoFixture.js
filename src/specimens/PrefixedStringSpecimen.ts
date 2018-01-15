@@ -1,5 +1,5 @@
-import ISpecimen from "./ISpecimen";
-import createGuid from "./createGuid";
+import ISpecimen from "../ISpecimen";
+import createGuid from "../createGuid";
 
 export default class PrefixedStringSpecimen implements ISpecimen<string> {
   public handles(typeInfo: any) {

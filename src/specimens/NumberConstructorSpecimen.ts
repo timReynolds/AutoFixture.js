@@ -1,4 +1,4 @@
-import ISpecimen from "./ISpecimen";
+import ISpecimen from "../ISpecimen";
 
 export default class NumberConstructorSpecimen implements ISpecimen<Number> {
   public handles(typeInfo: any) {
