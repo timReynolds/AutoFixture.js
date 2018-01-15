@@ -12,20 +12,21 @@ export default class AutoFixture<T> implements IAutoFixture<T> {
     this.specimens = specimensFactory(this.builderFactory.bind(this));
   }
 
-  private builderFactory(): IObjectBuilder<T> {
+  private builderFactory(): IObjectBuilder {
     return new ObjectBuilder(this);
   }
 
   private createInternal<T>(typeInfo: any, providedArgs: IArguments): T {
-    var i;
-    for (i = 0; i < this.specimens.length; ++i) {
-      if (this.specimens[i].handles(typeInfo)) {
-        // arguments isn't really an array, so get one
-        var args = Array.prototype.slice.call(providedArgs);
-        return this.specimens[i].create(typeInfo, args.slice(1));
-      }
+    const validSpeciments = this.specimens.filter(specimen =>
+      specimen.handles(typeInfo)
+    );
+
+    if (validSpeciments.length === 0) {
+      throw new Error("Unsupported Specimen: " + typeInfo);
     }
-    throw new Error("Unsupported Specimen: " + typeInfo);
+
+    const [_headArg, ...tailArgs] = providedArgs;
+    return validSpeciments[0].create(typeInfo, tailArgs);
   }
 
   private getRandomInt(min: number, max: number): number {
@@ -37,12 +38,11 @@ export default class AutoFixture<T> implements IAutoFixture<T> {
   }
 
   public createMany(typeInfo: any): T[] {
-    var count = this.getRandomInt(3, 10);
-    var result = [];
-    for (var i = 0; i < count; ++i) {
-      result.push(this.createInternal(typeInfo, arguments));
-    }
-    return result;
+    const count = this.getRandomInt(3, 10);
+    const accum = Array(Math.max(0, count));
+    for (let i = 0; i < count; i++)
+      accum[i] = this.createInternal(typeInfo, arguments);
+    return accum;
   }
 
   public build() {
