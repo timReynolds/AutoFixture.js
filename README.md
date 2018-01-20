@@ -7,15 +7,15 @@ find the syntax and functionality applicable to JavaScript very similar and easy
 # Quick Start
 
 For the examples below, I'm going to assume that `autofixture` has already been `require`'d and
-assigned to the `fixture` variable.
+assigned to the `fixture` constiable.
 
 ## General Syntax
 
 The general syntax provided by AutoFixture.js follows:
 
 ```javascript
-var fixture = require('autofixture');
-var instance = fixture.Create(ConstructorFunction[, args]);
+const fixture = require('autofixture');
+const instance = fixture.Create(ConstructorFunction[, args]);
 ```
 
 What that means is that most of the constructor functions for the builtin JavaScript types are available.
@@ -25,7 +25,7 @@ What that means is that most of the constructor functions for the builtin JavaSc
 To create a string we'd do the following:
 
 ```javascript
-var myString = fixture.create(String);
+const myString = fixture.create(String);
 // myString will look like a guid, e.g., '44CDC249-EAA2-4CC4-945C-B52475B0B0A9'
 ```
 
@@ -33,7 +33,7 @@ As with AutoFixture, we can also create a string that's prefixed by a value of o
 done by passing in a string:
 
 ```javascript
-var prefixedString = fixture.create('prefix');
+const prefixedString = fixture.create('prefix');
 // myString will look like a guid with our prefix. e.g.: 'prefix44CDC249-EAA2-4CC4-945C-B52475B0B0A9
 ```
 
@@ -42,18 +42,18 @@ var prefixedString = fixture.create('prefix');
 To create a Number we'd do the following:
 
 ```javascript
-var myNumber = fixture.create(Number);
+const myNumber = fixture.create(Number);
 // myNumber will be a number between [0, 1). E.g., 0.59147235396
 ```
 
 If we'd like a negative number or a larger number we can provide a multiplier:
 
 ```javascript
-var myNegativeNumber = fixture.create(Number, -1);
+const myNegativeNumber = fixture.create(Number, -1);
 // myNegativeNumber will be between (-1, 0]. E.g., -0.7982537387376
-var myLargeNumber = fixture.create(Number, 500);
+const myLargeNumber = fixture.create(Number, 500);
 // mylargeNumber will be between [0, 500). E.g., 423.8746491657
-var myLargeNegativeNumber = fixture.create(Number, -700);
+const myLargeNegativeNumber = fixture.create(Number, -700);
 // myLargeNegativeNumber will be between (-700, 0]. E.g., -672.451987454916
 ```
 
@@ -62,7 +62,7 @@ var myLargeNegativeNumber = fixture.create(Number, -700);
 To create a Boolean we can do the following:
 
 ```javascript
-var myBoolean = fixture.create(Boolean);
+const myBoolean = fixture.create(Boolean);
 // myBoolean will be either true or false.
 ```
 
@@ -78,7 +78,7 @@ To create an object that's similar to an existing object, just pass the object i
 method:
 
 ```javascript
-var myObj = fixture.create({prop1:'a string', prop2: 1.234, prop3: true});
+const myObj = fixture.create({prop1:'a string', prop2: 1.234, prop3: true});
 /*
 myObj will look something like the following: 
 {
@@ -104,7 +104,7 @@ function MyObjectType() {
     this.prop3 = 0;
     this.prop4 = false;
 }
-var myObj = fixture.create(MyObjectType);
+const myObj = fixture.create(MyObjectType);
 /*
 myObj will look something like the following:
 {
