@@ -78,6 +78,7 @@ export default class ObjectBuilder implements IObjectBuilder {
       }
 
       // Prefix string values
+      // tslint:disable-next-line:prefer-conditional-expression
       if (typeof likenessInstance[key] === "string") {
         result[key] = this.fixture.create(key);
       } else {
