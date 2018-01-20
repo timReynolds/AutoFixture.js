@@ -1,0 +1,66 @@
+{
+  "name": "@timReynolds/AutoFixture",
+  "version": "2.0.0",
+  "description": "JS port of the C# AutoFixture library",
+  "main": "dist",
+  "types": "dist",
+  "directories": {
+    "lib": "src"
+  },
+  "author": "Trussle",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "test": "npm run unit",
+    "test:coverage": "npm unit:coverage",
+    "unit": "jest",
+    "unit:coverage": "jest --coverage",
+    "unit:ci": "jest src/**/*.test.ts src/*.test.ts --json --outputFile='test-results.json'",
+    "lint": "tslint 'src/**/*.ts' 'integration/**/*.ts'",
+    "prettier": "prettier --parser typescript --write '**/*.ts'",
+    "precommit": "lint-staged",
+    "postversion": "git push origin master --tags --no-verify",
+    "preversion": "npm run unit && npm run build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^22.0.1",
+    "@types/node": "^9.3.0",
+    "@types/uuid": "^3.4.2",
+    "aws-sdk": "^2.130.0",
+    "coveralls": "^3.0.0",
+    "dotenv": "^4.0.0",
+    "husky": "^0.14.3",
+    "jest": "^22.0.6",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.5.3",
+    "rimraf": "^2.6.1",
+    "ts-jest": "^22.0.1",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.7.0",
+    "tslint-config-prettier": "^1.3.0",
+    "typescript": "^2.4.2"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run prettier",
+      "git add"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,90 @@
+
+> @trussle/AutoFixture@2.0.0 test /Users/timreynolds/Code/AutoFixture.js
+> npm run unit && npm run integration
+
+
+> @trussle/AutoFixture@2.0.0 unit /Users/timreynolds/Code/AutoFixture.js
+> jest
+
+  console.log src/AutoFixture.ts:13
+    typeInfo function fooBar() {
+                return { sample: "" };
+            }
+
+  console.log src/ObjectBuilder.ts:42
+    fixture AutoFixture {
+      specimens: 
+       [ PrefixedStringSpecimen {},
+         StringConstructorSpecimen {},
+         NumberConstructorSpecimen {},
+         SeededNumberSpecimenFactory {},
+         BooleanSpecimen {},
+         ObjectConstructorSpecimen { _builderFactory: [Function: bound builderFactory] },
+         FactoryFunctionSpecimen { _builderFactory: [Function: bound builderFactory] },
+         ObjectSpecimen { _builderFactory: [Function: bound builderFactory] } ] }
+
+  console.log src/specimens/FactoryFunctionSpecimen.ts:12
+    _builderFactory ObjectBuilder {
+      fixture: 
+       AutoFixture {
+         specimens: 
+          [ PrefixedStringSpecimen {},
+            StringConstructorSpecimen {},
+            NumberConstructorSpecimen {},
+            SeededNumberSpecimenFactory {},
+            BooleanSpecimen {},
+            [Object],
+            [Object],
+            [Object] ] },
+      withouts: {},
+      withs: {},
+      likeness: [Function: fooBar] }
+
+  console.log src/ObjectBuilder.ts:42
+    fixture AutoFixture {
+      specimens: 
+       [ PrefixedStringSpecimen {},
+         StringConstructorSpecimen {},
+         NumberConstructorSpecimen {},
+         SeededNumberSpecimenFactory {},
+         BooleanSpecimen {},
+         ObjectConstructorSpecimen { _builderFactory: [Function: bound builderFactory] },
+         FactoryFunctionSpecimen { _builderFactory: [Function: bound builderFactory] },
+         ObjectSpecimen { _builderFactory: [Function: bound builderFactory] } ] }
+
+  console.log src/ObjectBuilder.ts:49
+    CREATE
+
+  console.log src/ObjectBuilder.ts:51
+    likenessInstance { sample: '' }
+
+  console.log src/ObjectBuilder.ts:53
+    result { sample: '' }
+
+  console.log src/ObjectBuilder.ts:58
+    likenessInstance -> keys [ 'sample' ]
+
+  console.log src/ObjectBuilder.ts:61
+    likenessInstance -> key sample
+
+  console.log src/ObjectBuilder.ts:64
+    STRING AutoFixture {
+      specimens: 
+       [ PrefixedStringSpecimen {},
+         StringConstructorSpecimen {},
+         NumberConstructorSpecimen {},
+         SeededNumberSpecimenFactory {},
+         BooleanSpecimen {},
+         ObjectConstructorSpecimen { _builderFactory: [Function: bound builderFactory] },
+         FactoryFunctionSpecimen { _builderFactory: [Function: bound builderFactory] },
+         ObjectSpecimen { _builderFactory: [Function: bound builderFactory] } ] }
+
+  console.log src/AutoFixture.ts:13
+    typeInfo sample
+
+  console.log src/ObjectBuilder.ts:72
+    result { sample: 'sample2ee4e30a-a474-43ef-99ba-7e2a263c41a4' }
+
+  console.log src/ObjectBuilder.ts:74
+    finish init { sample: 'sample2ee4e30a-a474-43ef-99ba-7e2a263c41a4' }
+
