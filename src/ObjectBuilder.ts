@@ -11,7 +11,9 @@ function isConstructorFunction(sample: likenessCreator): boolean {
   return sample.toString().match(ctorRegex) !== null;
 }
 
-function createInstanceOf(sample: any): { [index: string]: any } {
+function createInstanceOf(
+  sample: any
+): { [index: string]: any; [index: number]: any } {
   let instance = {};
 
   if (isConstructorFunction(sample)) {
@@ -48,13 +50,13 @@ function getLikenessInstance(
   return sample;
 }
 
-export default class ObjectBuilder<T> implements IObjectBuilder {
-  private fixture: IAutoFixture<T>;
+export default class ObjectBuilder implements IObjectBuilder {
+  private fixture: IAutoFixture;
   private withouts: { [index: string]: any };
   private withs: { [index: string]: any };
   private likeness: likenessCreator;
 
-  constructor(fixture: IAutoFixture<T>) {
+  constructor(fixture: IAutoFixture) {
     this.fixture = fixture;
     this.withouts = {};
     this.withs = {};
@@ -96,12 +98,12 @@ export default class ObjectBuilder<T> implements IObjectBuilder {
     return this;
   }
 
-  public without(propName: string) {
+  public without(propName: string | number) {
     this.withouts[propName] = true;
     return this;
   }
 
-  public with(propName: string, propValue: any) {
+  public with(propName: string | number, propValue: any) {
     this.withs[propName] = propValue;
     return this;
   }

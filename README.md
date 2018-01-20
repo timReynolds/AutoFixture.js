@@ -119,3 +119,9 @@ myObj will look something like the following:
 As with Like-Object creation described above, the instance values are assigned based on their
 respective property types. Because `prop` and `prop2` are strings, they were assigned random
 values prefixed by the property name.
+
+# Type Definitions 
+Due to the dynamic return types of the library only relativly basic type definitions are included. These will be improved overtime from real world usage. 
+
+# Acknowledgements
+This library is a TypeScript rewrite of [NextITCorp/AutoFixture.js](https://github.com/NextITCorp/AutoFixture.js). Credit to them for the original work which wasn't published to NPM. 
