@@ -4,12 +4,15 @@ AutoFixture.js is based off of Mark Seeman's [AutoFixture](https://github.com/Au
 The AutoFixture.js syntax attempts to match that of AutoFixture as much as possible where reasonable. You'll
 find the syntax and functionality applicable to JavaScript very similar and easy to understand.
 
-# Quick Start
+## Quick Start
 
-For the examples below, I'm going to assume that `autofixture` has already been `require`'d and
-assigned to the `fixture` constiable.
+```
+npm install @timreynolds/autofixture
+```
 
 ## General Syntax
+For the examples below, I'm going to assume that `autofixture` has already been `require`'d and
+assigned to the `fixture` constiable.
 
 The general syntax provided by AutoFixture.js follows:
 
@@ -20,7 +23,7 @@ const instance = fixture.Create(ConstructorFunction[, args]);
 
 What that means is that most of the constructor functions for the builtin JavaScript types are available.
 
-## String Creation
+### String Creation
 
 To create a string we'd do the following:
 
@@ -37,7 +40,7 @@ const prefixedString = fixture.create('prefix');
 // myString will look like a guid with our prefix. e.g.: 'prefix44CDC249-EAA2-4CC4-945C-B52475B0B0A9
 ```
 
-## Number Creation
+### Number Creation
 
 To create a Number we'd do the following:
 
@@ -57,7 +60,7 @@ const myLargeNegativeNumber = fixture.create(Number, -700);
 // myLargeNegativeNumber will be between (-700, 0]. E.g., -672.451987454916
 ```
 
-## Boolean Creation
+### Boolean Creation
 
 To create a Boolean we can do the following:
 
@@ -66,9 +69,9 @@ const myBoolean = fixture.create(Boolean);
 // myBoolean will be either true or false.
 ```
 
-## Object Creation
+### Object Creation
 
-### Creation From a Like Object
+#### Creation From a Like Object
 
 In JavaScript we frequently use objects and object literals and care not whether the object was
 created with a constructor function. AutoFixture.js handles this by using a provided object as
@@ -92,7 +95,7 @@ Each of the property values are randomly chosen from the set of allowable values
 properties that are of type string the string value will be prefixed by the property name to 
 allow the values to be easily distinguishable.
 
-### Creation From a Constructor Function
+#### Creation From a Constructor Function
 
 Just as the builtin constructor functions can be used to create strings, numbers, and booleans,
 custom constructor functions can be used to create other objects.
@@ -120,8 +123,8 @@ As with Like-Object creation described above, the instance values are assigned b
 respective property types. Because `prop` and `prop2` are strings, they were assigned random
 values prefixed by the property name.
 
-# Type Definitions 
+## Type Definitions 
 Due to the dynamic return types of the library only relativly basic type definitions are included. These will be improved overtime from real world usage. 
 
-# Acknowledgements
+## Acknowledgements
 This library is a TypeScript rewrite of [NextITCorp/AutoFixture.js](https://github.com/NextITCorp/AutoFixture.js). Credit to them for the original work which wasn't published to NPM. 
