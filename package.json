@@ -1,5 +1,5 @@
 {
-  "name": "@trussle/AutoFixture",
+  "name": "@timReynolds/AutoFixture",
   "version": "2.0.0",
   "description": "JS port of the C# AutoFixture library",
   "main": "dist",
@@ -11,8 +11,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
-    "test": "npm run unit && npm run integration",
-    "test:coverage": "npm unit:coverage && npm integration:coverage",
+    "test": "npm run unit",
+    "test:coverage": "npm unit:coverage",
     "unit": "jest",
     "unit:coverage": "jest --coverage",
     "unit:ci": "jest src/**/*.test.ts src/*.test.ts --json --outputFile='test-results.json'",
