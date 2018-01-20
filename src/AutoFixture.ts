@@ -5,7 +5,7 @@ import ISpecimen from "./ISpecimen";
 import specimensFactory from "./specimens";
 import ObjectBuilder from "./ObjectBuilder";
 
-export default class AutoFixture<T> implements IAutoFixture<T> {
+export default class AutoFixture implements IAutoFixture {
   private specimens: ISpecimen<any>[];
 
   constructor() {
@@ -33,11 +33,11 @@ export default class AutoFixture<T> implements IAutoFixture<T> {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  public create(typeInfo: any): T {
+  public create<T>(typeInfo: any): T {
     return this.createInternal<T>(typeInfo, arguments);
   }
 
-  public createMany(typeInfo: any): T[] {
+  public createMany<T>(typeInfo: any): T[] {
     const count = this.getRandomInt(3, 10);
     const accum = Array(Math.max(0, count));
     for (let i = 0; i < count; i++)
