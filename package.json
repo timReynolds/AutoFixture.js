@@ -1,13 +1,13 @@
 {
   "name": "@timReynolds/AutoFixture",
-  "version": "2.0.0",
+  "version": "1.0.0-beta01",
   "description": "JS port of the C# AutoFixture library",
   "main": "dist",
   "types": "dist",
   "directories": {
     "lib": "src"
   },
-  "author": "Trussle",
+  "author": "Tim Reynolds",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
