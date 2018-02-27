@@ -17,7 +17,7 @@ assigned to the `fixture` constiable.
 The general syntax provided by AutoFixture.js follows:
 
 ```javascript
-const fixture = require('autofixture');
+const fixture = require('@timreynolds/autofixture');
 const instance = fixture.Create(ConstructorFunction[, args]);
 ```
 
