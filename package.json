@@ -2,8 +2,8 @@
   "name": "@timreynolds/autofixture",
   "version": "1.0.0-beta01",
   "description": "JS port of the C# AutoFixture library",
-  "main": "dist",
-  "types": "dist",
+  "main": "dist/Autofixture",
+  "types": "dist/Autofixture",
   "directories": {
     "lib": "src"
   },
