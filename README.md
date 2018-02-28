@@ -6,11 +6,12 @@ find the syntax and functionality applicable to JavaScript very similar and easy
 
 ## Quick Start
 
-```
+```bash
 npm install @timreynolds/autofixture
 ```
 
 ## General Syntax
+
 For the examples below, I'm going to assume that `autofixture` has already been `require`'d and
 assigned to the `fixture` constiable.
 
@@ -91,9 +92,37 @@ myObj will look something like the following:
 }
 */
 ```
+
 Each of the property values are randomly chosen from the set of allowable values. In the case of
 properties that are of type string the string value will be prefixed by the property name to 
 allow the values to be easily distinguishable.
+
+#### Building Objects
+
+When writing tests cases you often need to exclude a property or set it to a predetermined value. This is achived by using the `ObjectBuilder` exposed in AutoFixture.js via `build()`.
+
+The builder provides the following methods;
+
+* `like(template: {}): IObjectBuilder`
+* `without(propName: string): IObjectBuilder`
+* `with(propName: string, value: any): IObjectBuilder`
+
+```javascript
+const myObj = fixture
+  .build()
+  .like({prop1:'a string', prop2: 1.234, prop3: true})
+  .without("prop1")
+  .with("prop4", 'added property')
+  .create();
+/*
+myObj will look something like the following: 
+{
+  prop2: 0.2518655981465,
+  prop3: true,
+  prop4: 'added property'
+}
+*/
+```
 
 #### Creation From a Constructor Function
 
@@ -123,8 +152,10 @@ As with Like-Object creation described above, the instance values are assigned b
 respective property types. Because `prop` and `prop2` are strings, they were assigned random
 values prefixed by the property name.
 
-## Type Definitions 
-Due to the dynamic return types of the library only relativly basic type definitions are included. These will be improved overtime from real world usage. 
+## Type Definitions
+
+Due to the dynamic return types of the library only relativly basic type definitions are included. These will be improved overtime from real world usage.
 
 ## Acknowledgements
-This library is a TypeScript rewrite of [NextITCorp/AutoFixture.js](https://github.com/NextITCorp/AutoFixture.js). Credit to them for the original work which wasn't published to NPM. 
+
+This library is a TypeScript rewrite of [NextITCorp/AutoFixture.js](https://github.com/NextITCorp/AutoFixture.js). Credit to them for the original work which wasn't published to NPM.
