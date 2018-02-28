@@ -11,9 +11,7 @@ function isConstructorFunction(sample: likenessCreator): boolean {
   return sample.toString().match(ctorRegex) !== null;
 }
 
-function createInstanceOf(
-  sample: any
-): { [index: string]: any; [index: number]: any } {
+function createInstanceOf<T>(sample: any): T {
   let instance = {};
 
   if (isConstructorFunction(sample)) {
@@ -35,10 +33,10 @@ function createInstanceOf(
       throw new Error("Factory function returned null or undefined");
     }
 
-    return instance;
+    return instance as T;
   }
 
-  return instance;
+  return instance as T;
 }
 
 function getLikenessInstance(
@@ -50,7 +48,9 @@ function getLikenessInstance(
   return sample;
 }
 
-export default class ObjectBuilder implements IObjectBuilder {
+export default class ObjectBuilder<
+  T extends { [index: string]: any; [index: number]: any }
+> implements IObjectBuilder<T> {
   private fixture: IAutoFixture;
   private withouts: { [index: string]: any };
   private withs: { [index: string]: any };
@@ -63,9 +63,9 @@ export default class ObjectBuilder implements IObjectBuilder {
     this.likeness = {};
   }
 
-  public create() {
+  public create(): T {
     const likenessInstance = getLikenessInstance(this.likeness);
-    const result = createInstanceOf(this.likeness);
+    const result = createInstanceOf<T>(this.likeness);
 
     if (typeof likenessInstance === "undefined" && likenessInstance === null) {
       return result;

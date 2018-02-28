@@ -29,11 +29,11 @@ export default class AutoFixture implements IAutoFixture {
     return accum;
   }
 
-  public build() {
-    return this.builderFactory();
+  public build<T>() {
+    return this.builderFactory<T>();
   }
 
-  private builderFactory(): IObjectBuilder {
+  private builderFactory<T>(): IObjectBuilder<T> {
     return new ObjectBuilder(this);
   }
 
