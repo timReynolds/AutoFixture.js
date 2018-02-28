@@ -8,18 +8,18 @@ describe("ObjectBuilder", () => {
   });
 
   it("build().create() returns a new object", () => {
-    var o = fixture.build().create();
+    const o = fixture.build().create();
     expect(typeof o).toEqual("object");
   });
 
   describe("like()", () => {
     it("create() returns an object with the same properties as instance", () => {
-      var instance = {
+      const instance = {
         abc: "def",
         xyz: 123,
         lol: {}
       };
-      var o = fixture
+      const o = fixture
         .build()
         .like(instance)
         .create();
@@ -29,13 +29,13 @@ describe("ObjectBuilder", () => {
     });
 
     it("create() returns an object with property values as the same type as its likeness", () => {
-      var instance = {
+      const instance = {
         str: "def",
         num: 123,
         bool: false,
         obj: {}
       };
-      var o = fixture
+      const o = fixture
         .build()
         .like(instance)
         .create();
@@ -47,11 +47,11 @@ describe("ObjectBuilder", () => {
 
     describe("without()", () => {
       it("create() returns an object without the specified property set", () => {
-        var instance = {
+        const instance = {
           withme: "abc",
           withoutme: 123
         };
-        var obj = fixture
+        const obj = fixture
           .build()
           .like(instance)
           .without("withoutme")
@@ -61,7 +61,7 @@ describe("ObjectBuilder", () => {
       });
 
       it("allows multiple properties to be ignored", () => {
-        var instance = {
+        const instance = {
           key1: "value1",
           key2: "value2",
           key3: "value3",
@@ -71,7 +71,7 @@ describe("ObjectBuilder", () => {
           other2: 3,
           other3: false
         };
-        var obj = fixture
+        const obj = fixture
           .build()
           .like(instance)
           .without("key1", 1)
@@ -88,7 +88,7 @@ describe("ObjectBuilder", () => {
       });
 
       it("does not ignore properties that were not told to be ignored", () => {
-        var instance = {
+        const instance = {
           key1: "value1",
           key2: "value2",
           key3: "value3",
@@ -98,7 +98,7 @@ describe("ObjectBuilder", () => {
           other2: 3,
           other3: false
         };
-        var obj = fixture
+        const obj = fixture
           .build()
           .like(instance)
           .without("key1", 1)
@@ -116,25 +116,25 @@ describe("ObjectBuilder", () => {
 
     describe("with()", () => {
       it("create() returns an object with the specified property set to the specified value", () => {
-        var instance = {
+        const instance = {
           withme: "abc",
           withoutme: 123
         };
-        var obj = fixture
+        const obj = fixture
           .build()
           .like(instance)
-          ["with"]("withme", 42)
+          .with("withme", 42)
           .create();
         expect(obj.hasOwnProperty("withme")).toBeTruthy();
         expect(obj.withme).toEqual(42);
       });
 
       it("overrides any specified withouts that may be present", () => {
-        var instance = {
+        const instance = {
           prop: "abc",
           another: 123
         };
-        var obj = fixture
+        const obj = fixture
           .build()
           .like(instance)
           .with("prop", 42)
@@ -145,7 +145,7 @@ describe("ObjectBuilder", () => {
       });
 
       it("allows multiple properties to be set to specific values", () => {
-        var instance = {
+        const instance = {
           key1: "value1",
           key2: "value2",
           key3: "value3",
@@ -155,14 +155,14 @@ describe("ObjectBuilder", () => {
           other2: 3,
           other3: false
         };
-        var obj = fixture
+        const obj = fixture
           .build()
           .like(instance)
-          ["with"]("key1", 1)
-          ["with"]("key2", 2)
-          ["with"]("key3", 3)
-          ["with"]("key4", 4)
-          ["with"]("other2", "three")
+          .with("key1", 1)
+          .with("key2", 2)
+          .with("key3", 3)
+          .with("key4", 4)
+          .with("other2", "three")
           .create();
         expect(obj.key1).toBe(1);
         expect(obj.key2).toBe(2);

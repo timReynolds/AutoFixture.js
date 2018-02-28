@@ -1,8 +1,10 @@
 export type likenessCreator = Object | Function;
 
-export default interface IObjectBuilder {
-  create: () => { [index: string]: any; [index: number]: any };
-  like: (creator: likenessCreator) => void;
-  without: (propName: string) => void;
-  with: (propName: string, value: any) => void;
+export default interface IObjectBuilder<
+  T extends { [index: string]: any; [index: number]: any }
+> {
+  create: () => T;
+  like: (creator: likenessCreator) => IObjectBuilder<T>;
+  without: (propName: string) => IObjectBuilder<T>;
+  with: (propName: string, value: any) => IObjectBuilder<T>;
 };

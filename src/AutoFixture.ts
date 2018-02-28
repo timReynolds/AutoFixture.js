@@ -5,6 +5,10 @@ import ISpecimen from "./ISpecimen";
 import ObjectBuilder from "./ObjectBuilder";
 import specimensFactory from "./specimens";
 
+export { default as IAutoFixture } from "./IAutoFixture";
+export { default as IObjectBuilder } from "./IObjectBuilder";
+export { default as ISpecimen } from "./ISpecimen";
+
 export default class AutoFixture implements IAutoFixture {
   private specimens: Array<ISpecimen<any>>;
 
@@ -25,11 +29,11 @@ export default class AutoFixture implements IAutoFixture {
     return accum;
   }
 
-  public build() {
-    return this.builderFactory();
+  public build<T>() {
+    return this.builderFactory<T>();
   }
 
-  private builderFactory(): IObjectBuilder {
+  private builderFactory<T>(): IObjectBuilder<T> {
     return new ObjectBuilder(this);
   }
 

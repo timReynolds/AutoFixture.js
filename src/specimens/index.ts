@@ -1,14 +1,14 @@
-import ISpecimen, { ISpecimenConstructor } from "../ISpecimen";
 import IObjectBuilder from "../IObjectBuilder";
+import ISpecimen, { ISpecimenConstructor } from "../ISpecimen";
 
-import PrefixedStringSpecimen from "./PrefixedStringSpecimen";
-import StringConstructorSpecimen from "./StringConstructorSpecimen";
-import NumberConstructorSpecimen from "./NumberConstructorSpecimen";
-import SeededNumberSpecimen from "./SeededNumberSpecimen";
 import BooleanSpecimen from "./BooleanSpecimen";
-import ObjectConstructorSpecimen from "./ObjectConstructorSpecimen";
 import FactoryFunctionSpecimen from "./FactoryFunctionSpecimen";
+import NumberConstructorSpecimen from "./NumberConstructorSpecimen";
+import ObjectConstructorSpecimen from "./ObjectConstructorSpecimen";
 import ObjectSpecimen from "./ObjectSpecimen";
+import PrefixedStringSpecimen from "./PrefixedStringSpecimen";
+import SeededNumberSpecimen from "./SeededNumberSpecimen";
+import StringConstructorSpecimen from "./StringConstructorSpecimen";
 
 function specimenFactory<T>(
   Specimen: ISpecimenConstructor<T>,
@@ -17,7 +17,9 @@ function specimenFactory<T>(
   return new Specimen(objectBuilderFactory);
 }
 
-export default (objectBuilderFactory: () => IObjectBuilder) =>
+// IObjectBuilder<{}> isn't ideal.
+// We know T is going to be an object but not what T is yet
+export default (objectBuilderFactory: () => IObjectBuilder<{}>) =>
   [
     PrefixedStringSpecimen,
     StringConstructorSpecimen,
