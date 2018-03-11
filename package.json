@@ -62,5 +62,7 @@
       "json"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
 }
