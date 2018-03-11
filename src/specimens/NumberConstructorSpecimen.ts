@@ -5,7 +5,7 @@ export default class NumberConstructorSpecimen implements ISpecimen<Number> {
     return typeof typeInfo === "function" && typeInfo === Number;
   }
   public create(typeInfo: any, args: any) {
-    var multiplier = 1;
+    let multiplier = 1;
     if (args.length > 0 && typeof args[0] === "number") {
       multiplier = args[0];
     }

@@ -11,7 +11,7 @@ describe("AutoFixture", () => {
   });
 
   test("create when given a string creates a random string prefixed by the provided string", () => {
-    var prefix = "foo";
+    let prefix = "foo";
     expect(fixture.create(prefix)).toMatch(/foo.+/);
   });
 
@@ -32,7 +32,7 @@ describe("AutoFixture", () => {
       return { sample: "" };
     }
 
-    var instance = fixture.create(fooBar);
+    let instance = fixture.create(fooBar);
     expect(instance).toBeDefined();
     expect(instance.sample).toBeDefined();
   });
@@ -60,7 +60,7 @@ describe("AutoFixture", () => {
   });
 
   it("create when given the Boolean constructor generates a random true or false value", () => {
-    var dict = {},
+    let dict = {},
       i;
     for (i = 0; i < 100 && (!dict[true] || !dict[false]); ++i) {
       dict[fixture.create(Boolean)] = true;
@@ -71,7 +71,7 @@ describe("AutoFixture", () => {
 
   [true, false].forEach(testCase => {
     it(`creates a random boolean value when given a ${testCase} seed boolean`, () => {
-      var dict = {},
+      let dict = {},
         i,
         result,
         COUNT = 2000;
@@ -90,8 +90,8 @@ describe("AutoFixture", () => {
   });
 
   it("creates a random number when given a seed number (multiplier)", () => {
-    var seed = 123;
-    var num = fixture.create(seed);
+    let seed = 123;
+    let num = fixture.create(seed);
     expect(num).toBeGreaterThanOrEqual(0);
     expect(num).toBeLessThan(seed);
   });
@@ -104,7 +104,7 @@ describe("AutoFixture", () => {
       this.prop4 = false;
     }
 
-    var obj = fixture.create(MyObjectType);
+    let obj = fixture.create(MyObjectType);
     expect(obj.constructor.name).toEqual("MyObjectType");
   });
 
@@ -116,7 +116,7 @@ describe("AutoFixture", () => {
       this.prop4 = false;
     }
 
-    var obj = fixture.create(MyObjectType);
+    let obj = fixture.create(MyObjectType);
     expect(obj.prop1).toMatch(/prop1.+/);
     expect(obj.prop2).toMatch(/prop2.+/);
     expect(obj.prop3).not.toEqual(0);
@@ -136,12 +136,12 @@ describe("AutoFixture", () => {
       const min = testCase[1];
       const max = testCase[2];
 
-      var i,
+      let i,
         sum = 0,
         COUNT = 2000,
         average;
       for (i = 0; i < COUNT; ++i) {
-        var num = fixture.create(Number, multiplier);
+        let num = fixture.create(Number, multiplier);
         expect(num).toBeGreaterThanOrEqual(min);
         expect(num).toBeLessThan(max);
         sum += num;
@@ -156,7 +156,7 @@ describe("AutoFixture", () => {
   });
 
   it("createMany creates on average the expected number of instances", () => {
-    var result,
+    let result,
       i,
       average,
       lengthSum = 0,
@@ -195,12 +195,12 @@ describe("AutoFixture", () => {
       const min = testCase[1];
       const max = testCase[2];
 
-      var i,
+      let i,
         sum = 0,
         COUNT = 2000,
         average;
       for (i = 0; i < COUNT; ++i) {
-        var num = fixture.create(seed);
+        let num = fixture.create(seed);
         expect(num).toBeGreaterThanOrEqual(min);
         expect(num).toBeLessThan(max);
         sum += num;
@@ -230,12 +230,12 @@ describe("AutoFixture", () => {
       const min = testCase[1];
       const max = testCase[2];
 
-      var i,
+      let i,
         sum = 0,
         COUNT = 2000,
         average;
       for (i = 0; i < COUNT; ++i) {
-        var num = fixture.create(Number, multiplier);
+        let num = fixture.create(Number, multiplier);
         expect(num).toBeGreaterThan(min);
         expect(num).toBeLessThanOrEqual(max);
         sum += num;
@@ -266,12 +266,12 @@ describe("AutoFixture", () => {
       const min = testCase[1];
       const max = testCase[2];
 
-      var i,
+      let i,
         sum = 0,
         COUNT = 2000,
         average;
       for (i = 0; i < COUNT; ++i) {
-        var num = fixture.create(Number, seed);
+        let num = fixture.create(Number, seed);
         expect(num).toBeGreaterThan(min);
         expect(num).toBeLessThanOrEqual(max);
         sum += num;
@@ -316,7 +316,7 @@ describe("AutoFixture", () => {
     } does not return the same value when called multiple times`, () => {
       const factory = testCase[0];
 
-      var dict = {},
+      let dict = {},
         i,
         rand;
       for (i = 0; i < 1000; ++i) {

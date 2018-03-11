@@ -17,6 +17,7 @@
     "unit:coverage": "jest --coverage",
     "unit:ci": "jest src/**/*.test.ts src/*.test.ts --json --outputFile='test-results.json'",
     "lint": "tslint 'src/**/*.ts' 'integration/**/*.ts'",
+    "lint:fix": "tslint --fix 'src/**/*.ts' 'integration/**/*.ts'",
     "prettier": "prettier --parser typescript --write '**/*.ts'",
     "precommit": "lint-staged",
     "postversion": "git push origin master --tags --no-verify",
