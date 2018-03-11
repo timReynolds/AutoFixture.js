@@ -1,6 +1,6 @@
 import ISpecimen from "../ISpecimen";
 
-export default class BooleanSpecimen implements ISpecimen<Boolean> {
+export default class BooleanSpecimen implements ISpecimen<boolean> {
   public handles(typeInfo: any) {
     return (
       (typeof typeInfo === "function" && typeInfo === Boolean) ||

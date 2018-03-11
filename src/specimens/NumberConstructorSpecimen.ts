@@ -1,6 +1,6 @@
 import ISpecimen from "../ISpecimen";
 
-export default class NumberConstructorSpecimen implements ISpecimen<Number> {
+export default class NumberConstructorSpecimen implements ISpecimen<number> {
   public handles(typeInfo: any) {
     return typeof typeInfo === "function" && typeInfo === Number;
   }

@@ -1,6 +1,6 @@
 import ISpecimen from "../ISpecimen";
 
-export default class SeededNumberSpecimenFactory implements ISpecimen<Number> {
+export default class SeededNumberSpecimenFactory implements ISpecimen<number> {
   public handles(typeInfo: any) {
     return typeof typeInfo === "number";
   }
