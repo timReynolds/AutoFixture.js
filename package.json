@@ -12,7 +12,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
     "test": "npm run unit",
-    "test:coverage": "npm unit:coverage",
+    "test:coverage": "npm run unit:coverage",
     "unit": "jest",
     "unit:coverage": "jest --coverage",
     "unit:ci": "jest src/**/*.test.ts src/*.test.ts --json --outputFile='test-results.json'",
