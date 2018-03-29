@@ -30,7 +30,7 @@
     "@types/uuid": "3.4.3",
     "coveralls": "3.0.0",
     "dotenv": "5.0.1",
-    "husky": "^0.14.3",
+    "husky": "0.14.3",
     "jest": "22.4.3",
     "lint-staged": "7.0.0",
     "prettier": "1.11.1",
