@@ -1,5 +1,7 @@
 # AutoFixture.js
 
+[![NSP Status](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c/badge)](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c)
+
 AutoFixture.js is based off of Mark Seeman's [AutoFixture](https://github.com/AutoFixture/AutoFixture) for .NET.
 The AutoFixture.js syntax attempts to match that of AutoFixture as much as possible where reasonable. You'll
 find the syntax and functionality applicable to JavaScript very similar and easy to understand.
