@@ -1,9 +1,8 @@
 # AutoFixture.js
 
 [![Build Status](https://travis-ci.org/timReynolds/AutoFixture.js.svg?branch=master)](https://travis-ci.org/timReynolds/AutoFixture.js)
-
+[![Coverage Status](https://coveralls.io/repos/github/timReynolds/AutoFixture.js/badge.svg?branch=master)](https://coveralls.io/github/timReynolds/AutoFixture.js?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6cd0f795068fccf6ff1b/maintainability)](https://codeclimate.com/github/timReynolds/AutoFixture.js/maintainability)
-
 [![NSP Status](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c/badge)](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c)
 
 AutoFixture.js is based off of Mark Seeman's [AutoFixture](https://github.com/AutoFixture/AutoFixture) for .NET.
