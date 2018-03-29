@@ -12,10 +12,6 @@ cache:
   - node_modules
 
 script:
-- |
-    if [ "$TRAVIS_PULL_REQUEST" = false ]; then
-      set -e
-      npm run test:coverage
-      cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-      npm run lint
-    fi
+- npm run test:coverage
+- npm run lint
+- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
