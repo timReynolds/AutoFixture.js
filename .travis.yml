@@ -2,7 +2,7 @@
 language: node_js
 
 node_js:
-- latest
+- node
 - lts/*
 
 sudo: false
@@ -17,4 +17,5 @@ script:
       set -e
       npm run test:coverage
       cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+      npm run lint
     fi
