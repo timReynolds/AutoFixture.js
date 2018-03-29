@@ -1,5 +1,7 @@
 # AutoFixture.js
 
+[![Build Status](https://travis-ci.org/timReynolds/AutoFixture.js.svg?branch=master)](https://travis-ci.org/timReynolds/AutoFixture.js)
+
 [![NSP Status](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c/badge)](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c)
 
 AutoFixture.js is based off of Mark Seeman's [AutoFixture](https://github.com/AutoFixture/AutoFixture) for .NET.
