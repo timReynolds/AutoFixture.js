@@ -1,4 +1,4 @@
-export type likenessCreator = Object | Function;
+export type likenessCreator = {} | (() => void);
 
 export default interface IObjectBuilder<
   T extends { [index: string]: any; [index: number]: any }

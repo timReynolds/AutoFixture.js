@@ -1,7 +1,7 @@
 import ISpecimen from "../ISpecimen";
 import { ctorRegex, isConstructorFunctionRx } from "../regex";
 
-const getName = function(typeInfo: any) {
+const getName = (typeInfo: any) => {
   const name = typeInfo.name;
   if (typeof name === "undefined" && typeof typeInfo === "function") {
     const match = typeInfo.toString().match(ctorRegex);
