@@ -1,0 +1,20 @@
+---
+language: node_js
+
+node_js:
+- latest
+- lts/*
+
+sudo: false
+
+cache:
+  directories:
+  - node_modules
+
+script:
+- |
+    if [ "$TRAVIS_PULL_REQUEST" = false ]; then
+      set -e
+      npm run test:coverage
+      cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+    fi
