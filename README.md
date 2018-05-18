@@ -23,7 +23,8 @@ assigned to the `fixture` constiable.
 The general syntax provided by AutoFixture.js follows:
 
 ```javascript
-const fixture = require('@timreynolds/autofixture');
+const AutoFixture = require('@timreynolds/autofixture').default;
+const fixture = new AutoFixture();
 const instance = fixture.Create(ConstructorFunction[, args]);
 ```
 
