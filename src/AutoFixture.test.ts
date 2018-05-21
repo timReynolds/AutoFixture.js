@@ -155,29 +155,39 @@ describe("AutoFixture", () => {
     });
   });
 
-  it("createMany creates on average the expected number of instances", () => {
-    const COUNT = 2000;
-    const MIN = 3; // must change with implementation
-    const MAX = 10; // must change with implementation
-    const expectedAverage = MIN + (MAX - MIN) / 2;
+  describe("createMany", () => {
+    it("creates on average the expected number of instances", () => {
+      const COUNT = 2000;
+      const MIN = 3; // must change with implementation
+      const MAX = 10; // must change with implementation
+      const expectedAverage = MIN + (MAX - MIN) / 2;
 
-    let result;
-    let average;
-    let lengthSum = 0;
+      let result;
+      let average;
+      let lengthSum = 0;
 
-    for (let i = 0; i < COUNT; ++i) {
-      result = fixture.createMany(String);
-      expect(result.length).toBeGreaterThanOrEqual(MIN);
-      expect(result.length).toBeLessThanOrEqual(MAX);
-      lengthSum += result.length;
-    }
+      for (let i = 0; i < COUNT; ++i) {
+        result = fixture.createMany(String);
+        expect(result.length).toBeGreaterThanOrEqual(MIN);
+        expect(result.length).toBeLessThanOrEqual(MAX);
+        lengthSum += result.length;
+      }
 
-    // with many iterations we should start seeing the affects of
-    // the uniform distribution with the average coming in within
-    // 5% of the expected value.
-    average = lengthSum / COUNT;
-    expect(average).toBeGreaterThanOrEqual(0.95 * expectedAverage);
-    expect(average).toBeLessThanOrEqual(1.05 * expectedAverage);
+      // with many iterations we should start seeing the affects of
+      // the uniform distribution with the average coming in within
+      // 5% of the expected value.
+      average = lengthSum / COUNT;
+      expect(average).toBeGreaterThanOrEqual(0.95 * expectedAverage);
+      expect(average).toBeLessThanOrEqual(1.05 * expectedAverage);
+    });
+
+    it("Create the number requested when provided", () => {
+      const COUNT = 125;
+
+      const result = fixture.createMany(String, COUNT);
+
+      expect(result.length).toBe(COUNT);
+    });
   });
 
   [
