@@ -18,7 +18,7 @@ npm install @timreynolds/autofixture
 ## General Syntax
 
 For the examples below, I'm going to assume that `autofixture` has already been `require`'d and
-assigned to the `fixture` constiable.
+assigned to the `fixture` variable.
 
 The general syntax provided by AutoFixture.js follows:
 
