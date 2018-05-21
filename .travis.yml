@@ -5,10 +5,6 @@ node_js:
 - node
 - lts/*
 
-env:
-  global:
-    - CC_TEST_REPORTER_ID=bd08ca7b5f93eaa73f2c20a6137f7d25a1e3ebe0c23b9d44b57ea7bc2ee157f3
-
 sudo: false
 
 cache:
