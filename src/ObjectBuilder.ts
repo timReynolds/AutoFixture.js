@@ -1,6 +1,7 @@
 import IAutoFixture from "./IAutoFixture";
 import IObjectBuilder, { likenessCreator } from "./IObjectBuilder";
 
+import getRandomInt from "./getRandomInt";
 import { ctorRegex } from "./regex";
 
 function isFunction(sample: likenessCreator) {
@@ -92,6 +93,15 @@ export default class ObjectBuilder<
     });
 
     return result;
+  }
+
+  public createMany(manyCount?: number) {
+    const count = manyCount ? manyCount : getRandomInt(3, 10);
+    const accum = Array(Math.max(0, count));
+    for (let i = 0; i < count; i++) {
+      accum[i] = this.create();
+    }
+    return accum;
   }
 
   public like(instance: likenessCreator) {

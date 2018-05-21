@@ -2,6 +2,7 @@
 import IObjectBuilder from "./IObjectBuilder";
 import ISpecimen from "./ISpecimen";
 
+import getRandomInt from "./getRandomInt";
 import ObjectBuilder from "./ObjectBuilder";
 import specimensFactory from "./specimens";
 
@@ -20,8 +21,8 @@ export default class AutoFixture implements IAutoFixture {
     return this.createInternal<T>(typeInfo, arguments);
   }
 
-  public createMany<T>(typeInfo: any): T[] {
-    const count = this.getRandomInt(3, 10);
+  public createMany<T>(typeInfo: any, manyCount?: number): T[] {
+    const count = manyCount ? manyCount : getRandomInt(3, 10);
     const accum = Array(Math.max(0, count));
     for (let i = 0; i < count; i++) {
       accum[i] = this.createInternal(typeInfo, arguments);
@@ -48,9 +49,5 @@ export default class AutoFixture implements IAutoFixture {
 
     const [, ...tailArgs] = providedArgs;
     return validSpeciments[0].create(typeInfo, tailArgs);
-  }
-
-  private getRandomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

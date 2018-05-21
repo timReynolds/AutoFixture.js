@@ -35,14 +35,69 @@ describe("ObjectBuilder", () => {
         bool: false,
         obj: {}
       };
-      const o = fixture
+
+      const result = fixture
         .build()
         .like(instance)
         .create();
-      expect(typeof o.str).toEqual("string");
-      expect(typeof o.num).toEqual("number");
-      expect(typeof o.bool).toEqual("boolean");
-      expect(typeof o.obj).toEqual("object");
+
+      expect(typeof result.str).toEqual("string");
+      expect(typeof result.num).toEqual("number");
+      expect(typeof result.bool).toEqual("boolean");
+      expect(typeof result.obj).toEqual("object");
+    });
+
+    it("creates on average the expected number of instances", () => {
+      const COUNT = 2000;
+      const MIN = 3; // must change with implementation
+      const MAX = 10; // must change with implementation
+      const expectedAverage = MIN + (MAX - MIN) / 2;
+
+      const instance = {
+        str: "def",
+        num: 123,
+        bool: false,
+        obj: {}
+      };
+
+      let result;
+      let average;
+      let lengthSum = 0;
+
+      for (let i = 0; i < COUNT; ++i) {
+        result = fixture
+          .build()
+          .like(instance)
+          .createMany();
+
+        expect(result.length).toBeGreaterThanOrEqual(MIN);
+        expect(result.length).toBeLessThanOrEqual(MAX);
+        lengthSum += result.length;
+      }
+
+      // with many iterations we should start seeing the affects of
+      // the uniform distribution with the average coming in within
+      // 5% of the expected value.
+      average = lengthSum / COUNT;
+      expect(average).toBeGreaterThanOrEqual(0.95 * expectedAverage);
+      expect(average).toBeLessThanOrEqual(1.05 * expectedAverage);
+    });
+
+    it("Create the number requested when provided", () => {
+      const COUNT = 125;
+      const instance = {
+        str: "def",
+        num: 123,
+        bool: false,
+        obj: {}
+      };
+
+      const result = fixture
+        .build()
+        .like(instance)
+        .createMany(COUNT);
+
+      expect(result.length).toBe(COUNT);
     });
 
     describe("without()", () => {

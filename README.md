@@ -23,7 +23,8 @@ assigned to the `fixture` constiable.
 The general syntax provided by AutoFixture.js follows:
 
 ```javascript
-const fixture = require('@timreynolds/autofixture');
+const AutoFixture = require('@timreynolds/autofixture');
+const fixture = new AutoFixture();
 const instance = fixture.Create(ConstructorFunction[, args]);
 ```
 
@@ -156,6 +157,16 @@ myObj will look something like the following:
 As with Like-Object creation described above, the instance values are assigned based on their
 respective property types. Because `prop` and `prop2` are strings, they were assigned random
 values prefixed by the property name.
+
+### Creating Many
+
+When you're required to create an array the `create` method can be substituted for `createMany`.
+
+This method takes an additional optional parameter for the number of items to be generated. By default his is set to a random number between 3 and 10.
+
+```js
+const stringArray = fixture.createMany(String, 3);
+```
 
 ## Type Definitions
 
