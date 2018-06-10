@@ -8,4 +8,4 @@ export default interface IObjectBuilder<
   like: (creator: likenessCreator) => IObjectBuilder<T>;
   without: (propName: string) => IObjectBuilder<T>;
   with: (propName: string, value: any) => IObjectBuilder<T>;
-};
+}
