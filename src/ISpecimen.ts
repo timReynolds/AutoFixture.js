@@ -5,4 +5,4 @@ export interface ISpecimenConstructor<T> {
 export default interface ISpecimen<T> {
   handles: (typeInfo: any) => boolean;
   create: (typeInfo: any, args: any[]) => T;
-};
+}
