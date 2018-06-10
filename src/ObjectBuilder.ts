@@ -1,8 +1,12 @@
+import * as op from "object-path";
 import IAutoFixture from "./IAutoFixture";
 import IObjectBuilder, { likenessCreator } from "./IObjectBuilder";
 
 import getRandomInt from "./getRandomInt";
 import { ctorRegex } from "./regex";
+
+type IPath = Array<number | string> | number | string;
+type IMultiArray = IPath[];
 
 function isFunction(sample: likenessCreator) {
   return sample !== null && typeof sample === "function";
@@ -53,14 +57,14 @@ export default class ObjectBuilder<
   T extends { [index: string]: any; [index: number]: any }
 > implements IObjectBuilder<T> {
   private fixture: IAutoFixture;
-  private withouts: { [index: string]: any };
-  private withs: { [index: string]: any };
+  private withouts: IMultiArray;
+  private withs: Map<IPath, any>;
   private likeness: likenessCreator;
 
   constructor(fixture: IAutoFixture) {
     this.fixture = fixture;
-    this.withouts = {};
-    this.withs = {};
+    this.withouts = [];
+    this.withs = new Map();
     this.likeness = {};
   }
 
@@ -73,11 +77,6 @@ export default class ObjectBuilder<
     }
 
     Object.keys(likenessInstance).forEach(key => {
-      // Exclude without properties
-      if (this.withouts.hasOwnProperty(key)) {
-        return;
-      }
-
       // Prefix string values
       // tslint:disable-next-line:prefer-conditional-expression
       if (typeof likenessInstance[key] === "string") {
@@ -87,9 +86,13 @@ export default class ObjectBuilder<
       }
     });
 
-    // Override the result from withs
-    Object.keys(this.withs).forEach(key => {
-      result[key] = this.withs[key];
+    // Without overides
+    this.withouts.forEach(objPath => {
+      op.del(result, objPath);
+    });
+
+    this.withs.forEach((value, objPath) => {
+      op.set(result, objPath, value);
     });
 
     return result;
@@ -109,13 +112,13 @@ export default class ObjectBuilder<
     return this;
   }
 
-  public without(propName: string | number) {
-    this.withouts[propName] = true;
+  public without(objPath: IPath) {
+    this.withouts.push(objPath);
     return this;
   }
 
-  public with(propName: string | number, propValue: any) {
-    this.withs[propName] = propValue;
+  public with(objPath: IPath, value: any) {
+    this.withs.set(objPath, value);
     return this;
   }
 }

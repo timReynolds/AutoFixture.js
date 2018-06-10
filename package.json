@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/jest": "23.0.0",
     "@types/node": "9.6.20",
+    "@types/object-path": "^0.9.29",
     "@types/uuid": "3.4.3",
     "coveralls": "3.0.1",
     "dotenv": "6.0.0",
@@ -63,6 +64,7 @@
     ]
   },
   "dependencies": {
+    "object-path": "^0.11.4",
     "uuid": "^3.2.1"
   }
 }
