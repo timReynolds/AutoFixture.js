@@ -110,8 +110,8 @@ When writing tests cases you often need to exclude a property or set it to a pre
 The builder provides the following methods;
 
 * `like(template: {}): IObjectBuilder`
-* `without(propName: string): IObjectBuilder`
-* `with(propName: string, value: any): IObjectBuilder`
+* `without(propName: objectPath): IObjectBuilder`
+* `with(propName: objectPath, value: any): IObjectBuilder`
 
 ```javascript
 const myObj = fixture
@@ -129,6 +129,8 @@ myObj will look something like the following:
 }
 */
 ```
+
+Object paths as supported by [object-path](https://github.com/mariocasciaro/object-path) can be used for with and without methods on the builder.
 
 #### Creation From a Constructor Function
 
