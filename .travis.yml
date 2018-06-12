@@ -17,8 +17,9 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-- npm run test:coverage
 - npm run lint
+- npm run test:coverage
+- npm run build
 - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 after_script:
