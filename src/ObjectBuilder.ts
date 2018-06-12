@@ -1,12 +1,13 @@
 import * as op from "object-path";
 import IAutoFixture from "./IAutoFixture";
-import IObjectBuilder, { likenessCreator } from "./IObjectBuilder";
+import IObjectBuilder, {
+  IMultiArray,
+  IPath,
+  likenessCreator
+} from "./IObjectBuilder";
 
 import getRandomInt from "./getRandomInt";
 import { ctorRegex } from "./regex";
-
-type IPath = Array<number | string> | number | string;
-type IMultiArray = IPath[];
 
 function isFunction(sample: likenessCreator) {
   return sample !== null && typeof sample === "function";
