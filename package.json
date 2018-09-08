@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/jest": "23.3.2",
-    "@types/node": "10.9.3",
+    "@types/node": "10.9.4",
     "@types/object-path": "0.9.29",
     "@types/uuid": "3.4.4",
     "coveralls": "3.0.2",
