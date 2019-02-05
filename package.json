@@ -33,7 +33,7 @@
     "preversion": "npm run unit && npm run build"
   },
   "devDependencies": {
-    "@types/jest": "23.3.13",
+    "@types/jest": "23.3.14",
     "@types/node": "10.11.0",
     "@types/object-path": "0.11.0",
     "@types/uuid": "3.4.4",
