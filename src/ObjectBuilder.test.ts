@@ -1,7 +1,7 @@
-import AutoFixture from "./AutoFixture";
+import AutoFixture, { IAutoFixture } from "./AutoFixture";
 
 describe("ObjectBuilder", () => {
-  let fixture;
+  let fixture: IAutoFixture;
 
   beforeEach(() => {
     fixture = new AutoFixture();
@@ -14,13 +14,19 @@ describe("ObjectBuilder", () => {
 
   describe("like()", () => {
     it("create() returns an object with the same properties as instance", () => {
+      interface IInstance {
+        abc: string;
+        xyz: number;
+        lol: object;
+      }
+
       const instance = {
         abc: "def",
         xyz: 123,
         lol: {}
       };
       const o = fixture
-        .build()
+        .build<IInstance>()
         .like(instance)
         .create();
       expect(o.abc).toBeDefined();
@@ -29,6 +35,13 @@ describe("ObjectBuilder", () => {
     });
 
     it("create() returns an object with property values as the same type as its likeness", () => {
+      interface IInstance {
+        str: string;
+        num: number;
+        bool: boolean;
+        obj: object;
+      }
+
       const instance = {
         str: "def",
         num: 123,
@@ -37,7 +50,7 @@ describe("ObjectBuilder", () => {
       };
 
       const result = fixture
-        .build()
+        .build<IInstance>()
         .like(instance)
         .create();
 
@@ -132,11 +145,11 @@ describe("ObjectBuilder", () => {
         const result = fixture
           .build()
           .like(instance)
-          .without("key1", 1)
-          .without("key2", 2)
-          .without("key3", 3)
-          .without("key4", 4)
-          .without("other2", "three")
+          .without("key1")
+          .without("key2")
+          .without("key3")
+          .without("key4")
+          .without("other2")
           .create();
 
         expect(result.hasOwnProperty("key1")).toBeFalsy();
@@ -161,11 +174,11 @@ describe("ObjectBuilder", () => {
         const result = fixture
           .build()
           .like(instance)
-          .without("key1", 1)
-          .without("key2", 2)
-          .without("key3", 3)
-          .without("key4", 4)
-          .without("other2", "three")
+          .without("key1")
+          .without("key2")
+          .without("key3")
+          .without("key4")
+          .without("other2")
           .create();
 
         expect(result.hasOwnProperty("key5")).toBeTruthy();
@@ -174,6 +187,14 @@ describe("ObjectBuilder", () => {
       });
 
       it("create() returns an object without the specified property path for a nested object", () => {
+        interface IInstance {
+          withme: string;
+          with: {
+            me: string;
+            out?: string;
+          };
+        }
+
         const instance = {
           withme: "abc",
           with: {
@@ -183,7 +204,7 @@ describe("ObjectBuilder", () => {
         };
 
         const result = fixture
-          .build()
+          .build<IInstance>()
           .like(instance)
           .without("with.out")
           .create();
@@ -196,13 +217,18 @@ describe("ObjectBuilder", () => {
 
     describe("with()", () => {
       it("create() returns an object with the specified property set to the specified value", () => {
+        interface IInstance {
+          withme: string;
+          withoutme: number;
+        }
+
         const instance = {
           withme: "abc",
           withoutme: 123
         };
 
         const result = fixture
-          .build()
+          .build<IInstance>()
           .like(instance)
           .with("withme", 42)
           .create();
@@ -212,6 +238,13 @@ describe("ObjectBuilder", () => {
       });
 
       it("create() returns an object with the specified object path set to the specified value", () => {
+        interface IInstance {
+          with: {
+            me: string;
+          };
+          withoutme: number;
+        }
+
         const instance = {
           with: {
             me: 42
@@ -220,7 +253,7 @@ describe("ObjectBuilder", () => {
         };
 
         const result = fixture
-          .build()
+          .build<IInstance>()
           .like(instance)
           .with("with.me", 42)
           .create();
@@ -230,13 +263,18 @@ describe("ObjectBuilder", () => {
       });
 
       it("overrides any specified withouts that may be present", () => {
+        interface IInstance {
+          prop: string;
+          another: number;
+        }
+
         const instance = {
           prop: "abc",
           another: 123
         };
 
         const result = fixture
-          .build()
+          .build<IInstance>()
           .like(instance)
           .with("prop", 42)
           .without("prop")
@@ -247,6 +285,17 @@ describe("ObjectBuilder", () => {
       });
 
       it("allows multiple properties to be set to specific values", () => {
+        interface IInstance {
+          key1: string;
+          key2: string;
+          key3: string;
+          key4: string;
+          key5: string;
+          other1: number;
+          other2: number;
+          other3: boolean;
+        }
+
         const instance = {
           key1: "value1",
           key2: "value2",
@@ -259,7 +308,7 @@ describe("ObjectBuilder", () => {
         };
 
         const result = fixture
-          .build()
+          .build<IInstance>()
           .like(instance)
           .with("key1", 1)
           .with("key2", 2)
