@@ -1,9 +1,7 @@
 # AutoFixture.js
 
 [![Build Status](https://travis-ci.org/timReynolds/AutoFixture.js.svg?branch=master)](https://travis-ci.org/timReynolds/AutoFixture.js)
-[![Coverage Status](https://coveralls.io/repos/github/timReynolds/AutoFixture.js/badge.svg?branch=master)](https://coveralls.io/github/timReynolds/AutoFixture.js?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6cd0f795068fccf6ff1b/maintainability)](https://codeclimate.com/github/timReynolds/AutoFixture.js/maintainability)
-[![NSP Status](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c/badge)](https://nodesecurity.io/orgs/timreynolds/projects/231004b7-09d6-41e7-8daf-1212ae58a35c)
 
 AutoFixture.js is based off of Mark Seeman's [AutoFixture](https://github.com/AutoFixture/AutoFixture) for .NET.
 The AutoFixture.js syntax attempts to match that of AutoFixture as much as possible where reasonable. You'll
@@ -43,7 +41,7 @@ As with AutoFixture, we can also create a string that's prefixed by a value of o
 done by passing in a string:
 
 ```javascript
-const prefixedString = fixture.create('prefix');
+const prefixedString = fixture.create("prefix");
 // myString will look like a guid with our prefix. e.g.: 'prefix44CDC249-EAA2-4CC4-945C-B52475B0B0A9
 ```
 
@@ -88,7 +86,7 @@ To create an object that's similar to an existing object, just pass the object i
 method:
 
 ```javascript
-const myObj = fixture.create({prop1:'a string', prop2: 1.234, prop3: true});
+const myObj = fixture.create({ prop1: "a string", prop2: 1.234, prop3: true });
 /*
 myObj will look something like the following: 
 {
@@ -100,7 +98,7 @@ myObj will look something like the following:
 ```
 
 Each of the property values are randomly chosen from the set of allowable values. In the case of
-properties that are of type string the string value will be prefixed by the property name to 
+properties that are of type string the string value will be prefixed by the property name to
 allow the values to be easily distinguishable.
 
 #### Building Objects
@@ -109,16 +107,16 @@ When writing tests cases you often need to exclude a property or set it to a pre
 
 The builder provides the following methods;
 
-* `like(template: {}): IObjectBuilder`
-* `without(propName: objectPath): IObjectBuilder`
-* `with(propName: objectPath, value: any): IObjectBuilder`
+- `like(template: {}): IObjectBuilder`
+- `without(propName: objectPath): IObjectBuilder`
+- `with(propName: objectPath, value: any): IObjectBuilder`
 
 ```javascript
 const myObj = fixture
   .build()
-  .like({prop1:'a string', prop2: 1.234, prop3: true})
+  .like({ prop1: "a string", prop2: 1.234, prop3: true })
   .without("prop1")
-  .with("prop4", 'added property')
+  .with("prop4", "added property")
   .create();
 /*
 myObj will look something like the following: 
@@ -139,10 +137,10 @@ custom constructor functions can be used to create other objects.
 
 ```javascript
 function MyObjectType() {
-    this.prop1 = '';
-    this.prop2 = '';
-    this.prop3 = 0;
-    this.prop4 = false;
+  this.prop1 = "";
+  this.prop2 = "";
+  this.prop3 = 0;
+  this.prop4 = false;
 }
 const myObj = fixture.create(MyObjectType);
 /*
