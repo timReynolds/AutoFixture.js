@@ -1,10 +1,9 @@
-﻿import AutoFixture from "./AutoFixture";
+﻿import AutoFixture, { IAutoFixture } from "./AutoFixture";
 
 describe("AutoFixture", () => {
   const GUID_REGEX = /^[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}$/i;
-  const NUMBER_REGEX = /^\d+\.?\d*$/;
 
-  let fixture;
+  let fixture: IAutoFixture;
 
   beforeEach(() => {
     fixture = new AutoFixture();
@@ -28,11 +27,15 @@ describe("AutoFixture", () => {
   });
 
   test("create when given a function uses that function to create an instance", () => {
-    function fooBar() {
+    interface ISample {
+      sample: string;
+    }
+
+    function fooBar(): ISample {
       return { sample: "" };
     }
 
-    const instance = fixture.create(fooBar);
+    const instance = fixture.create<ISample>(fooBar);
     expect(instance).toBeDefined();
     expect(instance.sample).toBeDefined();
   });
@@ -60,32 +63,35 @@ describe("AutoFixture", () => {
   });
 
   it("create when given the Boolean constructor generates a random true or false value", () => {
-    const dict = {};
+    const dict: {
+      [index: number]: boolean;
+    } = {};
 
-    for (let i = 0; i < 100 && (!dict[true] || !dict[false]); ++i) {
-      dict[fixture.create(Boolean)] = true;
+    for (let i = 0; i < 100 && (!dict[1] || !dict[0]); ++i) {
+      const prop = fixture.create<boolean>(Boolean) ? 1 : 0;
+      dict[prop] = true;
     }
-    expect(dict[true]).toBeTruthy();
-    expect(dict[false]).toBeTruthy();
+    expect(dict[1]).toBeTruthy();
+    expect(dict[0]).toBeTruthy();
   });
 
   [true, false].forEach(testCase => {
     it(`creates a random boolean value when given a ${testCase} seed boolean`, () => {
-      const dict = {};
-      let result;
+      const dict: { [index: number]: number } = {};
+      let result: number;
       const COUNT = 2000;
 
       for (let i = 0; i < COUNT; ++i) {
-        result = fixture.create(testCase);
+        result = fixture.create<boolean>(testCase) ? 1 : 0;
         dict[result] = dict[result] + 1 || 1;
       }
       // with many iterations we should start seeing the affects of
       // the uniform distribution with the average coming in around
       // 50% of the multiplier, so verify we're between 45 and 55%.
-      expect(dict[true]).toBeGreaterThanOrEqual(0.45 * COUNT);
-      expect(dict[true]).toBeLessThanOrEqual(0.55 * COUNT);
-      expect(dict[false]).toBeGreaterThanOrEqual(0.45 * COUNT);
-      expect(dict[false]).toBeLessThanOrEqual(0.55 * COUNT);
+      expect(dict[1]).toBeGreaterThanOrEqual(0.45 * COUNT);
+      expect(dict[1]).toBeLessThanOrEqual(0.55 * COUNT);
+      expect(dict[0]).toBeGreaterThanOrEqual(0.45 * COUNT);
+      expect(dict[0]).toBeLessThanOrEqual(0.55 * COUNT);
     });
   });
 
@@ -97,7 +103,14 @@ describe("AutoFixture", () => {
   });
 
   it("creates an object using the constructor function when passed a constructor function", () => {
-    function MyObjectType() {
+    interface IMyObjectType {
+      prop1: string;
+      prop2: string;
+      prop3: number;
+      prop4: boolean;
+    }
+
+    function MyObjectType(this: IMyObjectType) {
       this.prop1 = "";
       this.prop2 = "";
       this.prop3 = 0;
@@ -109,14 +122,21 @@ describe("AutoFixture", () => {
   });
 
   it("creates an object with the same properties as the expected type with random values assigned to them", () => {
-    function MyObjectType() {
+    interface IMyObjectType {
+      prop1: string;
+      prop2: string;
+      prop3: number;
+      prop4: boolean;
+    }
+
+    function MyObjectType(this: IMyObjectType) {
       this.prop1 = "";
       this.prop2 = "";
       this.prop3 = 0;
       this.prop4 = false;
     }
 
-    const obj = fixture.create(MyObjectType);
+    const obj = fixture.create<IMyObjectType>(MyObjectType);
     expect(obj.prop1).toMatch(/prop1.+/);
     expect(obj.prop2).toMatch(/prop2.+/);
     expect(obj.prop3).not.toEqual(0);
@@ -141,7 +161,7 @@ describe("AutoFixture", () => {
       let average;
 
       for (let i = 0; i < COUNT; ++i) {
-        const num = fixture.create(Number, multiplier);
+        const num = fixture.create<number>(Number, multiplier);
         expect(num).toBeGreaterThanOrEqual(min);
         expect(num).toBeLessThan(max);
         sum += num;
@@ -211,7 +231,7 @@ describe("AutoFixture", () => {
       let average;
 
       for (let i = 0; i < COUNT; ++i) {
-        const num = fixture.create(seed);
+        const num = fixture.create<number>(seed);
         expect(num).toBeGreaterThanOrEqual(min);
         expect(num).toBeLessThan(max);
         sum += num;
@@ -246,7 +266,7 @@ describe("AutoFixture", () => {
       const COUNT = 2000;
 
       for (let i = 0; i < COUNT; ++i) {
-        const num = fixture.create(Number, multiplier);
+        const num = fixture.create<number>(Number, multiplier);
         expect(num).toBeGreaterThan(min);
         expect(num).toBeLessThanOrEqual(max);
         sum += num;
@@ -282,7 +302,7 @@ describe("AutoFixture", () => {
       let average;
 
       for (let i = 0; i < COUNT; ++i) {
-        const num = fixture.create(Number, seed);
+        const num = fixture.create<number>(Number, seed);
         expect(num).toBeGreaterThan(min);
         expect(num).toBeLessThanOrEqual(max);
         sum += num;
@@ -327,7 +347,7 @@ describe("AutoFixture", () => {
     } does not return the same value when called multiple times`, () => {
       const factory = testCase[0] as () => string;
 
-      const dict = {};
+      const dict: { [index: string]: boolean } = {};
       let rand;
 
       for (let i = 0; i < 1000; ++i) {
