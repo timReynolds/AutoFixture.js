@@ -1,14 +1,14 @@
-﻿import IAutoFixture from "./IAutoFixture";
-import IObjectBuilder from "./IObjectBuilder";
-import ISpecimen from "./ISpecimen";
+﻿import IAutoFixture from './IAutoFixture';
+import IObjectBuilder from './IObjectBuilder';
+import ISpecimen from './ISpecimen';
 
-import getRandomInt from "./getRandomInt";
-import ObjectBuilder from "./ObjectBuilder";
-import specimensFactory from "./specimens";
+import getRandomInt from './getRandomInt';
+import ObjectBuilder from './ObjectBuilder';
+import specimensFactory from './specimens';
 
-export { default as IAutoFixture } from "./IAutoFixture";
-export { default as IObjectBuilder } from "./IObjectBuilder";
-export { default as ISpecimen } from "./ISpecimen";
+export { default as IAutoFixture } from './IAutoFixture';
+export { default as IObjectBuilder } from './IObjectBuilder';
+export { default as ISpecimen } from './ISpecimen';
 
 export default class AutoFixture implements IAutoFixture {
   private specimens: Array<ISpecimen<any>>;
@@ -44,7 +44,7 @@ export default class AutoFixture implements IAutoFixture {
     );
 
     if (validSpeciments.length === 0) {
-      throw new Error("Unsupported Specimen: " + typeInfo);
+      throw new Error('Unsupported Specimen: ' + typeInfo);
     }
 
     const [, ...tailArgs] = providedArgs;

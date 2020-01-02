@@ -2,10 +2,18 @@
   "name": "@timreynolds/autofixture",
   "version": "1.1.1",
   "description": "JS port of the C# AutoFixture library",
-  "main": "dist/AutoFixture",
-  "types": "dist/AutoFixture",
-  "directories": {
-    "lib": "src"
+  "main": "dist/index.js",
+  "module": "dist/autofixture.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch --entry src/AutoFixture.ts",
+    "build": "tsdx build --entry src/AutoFixture.ts",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "npm run build"
   },
   "author": "Tim Reynolds",
   "license": "MIT",
@@ -17,60 +25,27 @@
     "url": "https://github.com/timreynolds/AutoFixture.js/issues"
   },
   "homepage": "https://github.com/timreynolds/AutoFixture.js",
-  "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && tsc",
-    "test": "npm run unit",
-    "test:coverage": "npm run unit:coverage",
-    "unit": "jest",
-    "unit:coverage": "jest --coverage",
-    "unit:ci": "jest src/**/*.test.ts src/*.test.ts --json --outputFile='test-results.json'",
-    "lint": "tslint 'src/**/*.ts' 'integration/**/*.ts'",
-    "lint:fix": "tslint --fix 'src/**/*.ts' 'integration/**/*.ts'",
-    "prettier": "prettier --parser typescript --write '**/*.ts'",
-    "precommit": "lint-staged",
-    "postversion": "git push origin master --tags --no-verify",
-    "preversion": "npm run unit && npm run build"
-  },
   "devDependencies": {
-    "@types/jest": "24.0.25",
-    "@types/node": "11.13.3",
-    "@types/object-path": "0.11.0",
-    "@types/uuid": "3.4.6",
-    "husky": "3.1.0",
-    "jest": "24.9.0",
-    "lint-staged": "9.5.0",
-    "prettier": "1.19.1",
-    "rimraf": "3.0.0",
-    "ts-jest": "24.2.0",
-    "ts-node": "8.5.4",
-    "tslint": "5.20.1",
-    "tslint-config-prettier": "1.18.0",
-    "typescript": "3.4.5"
+    "@types/jest": "^24.0.25",
+    "@types/object-path": "^0.11.0",
+    "@types/uuid": "^3.4.6",
+    "husky": "^3.1.0",
+    "tsdx": "^0.12.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.4"
   },
-  "lint-staged": {
-    "*.ts": [
-      "npm run prettier",
-      "git add"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
   },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "collectCoverageFrom": [
-      "src/**/*.{ts,tsx}"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "dependencies": {
-    "npm-check-updates": "^4.0.1",
     "object-path": "^0.11.4",
     "uuid": "^3.2.1"
   }

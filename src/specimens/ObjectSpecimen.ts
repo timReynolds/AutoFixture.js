@@ -1,4 +1,4 @@
-import ISpecimen from "../ISpecimen";
+import ISpecimen from '../ISpecimen';
 
 export default class ObjectSpecimen<T> implements ISpecimen<T> {
   private _builderFactory: any;
@@ -6,7 +6,7 @@ export default class ObjectSpecimen<T> implements ISpecimen<T> {
     this._builderFactory = builderFactory;
   }
   public handles(typeInfo: any) {
-    return typeof typeInfo === "object";
+    return typeof typeInfo === 'object';
   }
   public create(typeInfo: any) {
     return this._builderFactory()

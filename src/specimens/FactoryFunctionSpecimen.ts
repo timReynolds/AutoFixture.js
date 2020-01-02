@@ -1,4 +1,4 @@
-import ISpecimen from "../ISpecimen";
+import ISpecimen from '../ISpecimen';
 
 export default class FactoryFunctionSpecimen<T> implements ISpecimen<T> {
   private _builderFactory: any;
@@ -8,7 +8,7 @@ export default class FactoryFunctionSpecimen<T> implements ISpecimen<T> {
   }
 
   public handles(typeInfo: any) {
-    return typeof typeInfo === "function";
+    return typeof typeInfo === 'function';
   }
 
   public create(typeInfo: any) {
@@ -17,7 +17,7 @@ export default class FactoryFunctionSpecimen<T> implements ISpecimen<T> {
         .like(typeInfo)
         .create();
     } catch (err) {
-      throw new Error("Unable to create instance using factory function");
+      throw new Error('Unable to create instance using factory function');
     }
   }
 }
