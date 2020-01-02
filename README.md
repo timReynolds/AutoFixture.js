@@ -1,6 +1,6 @@
 # AutoFixture.js
 
-[![Build Status](https://travis-ci.org/timReynolds/AutoFixture.js.svg?branch=master)](https://travis-ci.org/timReynolds/AutoFixture.js)
+[![Build Status](https://cloud.drone.io/api/badges/timReynolds/AutoFixture.js/status.svg)](https://cloud.drone.io/timReynolds/AutoFixture.js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6cd0f795068fccf6ff1b/maintainability)](https://codeclimate.com/github/timReynolds/AutoFixture.js/maintainability)
 
 AutoFixture.js is based off of Mark Seeman's [AutoFixture](https://github.com/AutoFixture/AutoFixture) for .NET.
