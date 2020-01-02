@@ -6,16 +6,16 @@ steps:
   - name: npm install
     image: node:lts-alpine
     commands:
-      - npm ci
+      - yarn
   - name: lint
     image: node:lts-alpine
     commands:
-      - npm run lint
+      - yarn lint
   - name: test
     image: node:lts-alpine
     commands:
-      - npm run lint
+      - yarn test
   - name: build
     image: node:lts-alpine
     commands:
-      - npm run build
+      - yarn build
