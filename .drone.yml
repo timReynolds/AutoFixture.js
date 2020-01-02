@@ -3,6 +3,10 @@ type: docker
 name: autofixture.js
 
 steps:
+  - name: npm install
+    image: node:lts-alpine
+    commands:
+      - npm ci
   - name: lint
     image: node:lts-alpine
     commands:
