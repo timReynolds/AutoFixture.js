@@ -1,14 +1,14 @@
-import IObjectBuilder from "../IObjectBuilder";
-import ISpecimen, { ISpecimenConstructor } from "../ISpecimen";
+import IObjectBuilder from '../IObjectBuilder';
+import ISpecimen, { ISpecimenConstructor } from '../ISpecimen';
 
-import BooleanSpecimen from "./BooleanSpecimen";
-import FactoryFunctionSpecimen from "./FactoryFunctionSpecimen";
-import NumberConstructorSpecimen from "./NumberConstructorSpecimen";
-import ObjectConstructorSpecimen from "./ObjectConstructorSpecimen";
-import ObjectSpecimen from "./ObjectSpecimen";
-import PrefixedStringSpecimen from "./PrefixedStringSpecimen";
-import SeededNumberSpecimen from "./SeededNumberSpecimen";
-import StringConstructorSpecimen from "./StringConstructorSpecimen";
+import BooleanSpecimen from './BooleanSpecimen';
+import FactoryFunctionSpecimen from './FactoryFunctionSpecimen';
+import NumberConstructorSpecimen from './NumberConstructorSpecimen';
+import ObjectConstructorSpecimen from './ObjectConstructorSpecimen';
+import ObjectSpecimen from './ObjectSpecimen';
+import PrefixedStringSpecimen from './PrefixedStringSpecimen';
+import SeededNumberSpecimen from './SeededNumberSpecimen';
+import StringConstructorSpecimen from './StringConstructorSpecimen';
 
 function specimenFactory<T>(
   Specimen: ISpecimenConstructor<T>,
@@ -28,5 +28,5 @@ export default (objectBuilderFactory: () => IObjectBuilder<{}>) =>
     BooleanSpecimen,
     ObjectConstructorSpecimen,
     FactoryFunctionSpecimen,
-    ObjectSpecimen
+    ObjectSpecimen,
   ].map(specimen => specimenFactory(specimen, objectBuilderFactory));

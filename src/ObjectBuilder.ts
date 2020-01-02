@@ -1,16 +1,16 @@
-import * as op from "object-path";
-import IAutoFixture from "./IAutoFixture";
+import * as op from 'object-path';
+import IAutoFixture from './IAutoFixture';
 import IObjectBuilder, {
   IMultiArray,
   IPath,
-  likenessCreator
-} from "./IObjectBuilder";
+  likenessCreator,
+} from './IObjectBuilder';
 
-import getRandomInt from "./getRandomInt";
-import { ctorRegex } from "./regex";
+import getRandomInt from './getRandomInt';
+import { ctorRegex } from './regex';
 
 function isFunction(sample: likenessCreator) {
-  return sample !== null && typeof sample === "function";
+  return sample !== null && typeof sample === 'function';
 }
 
 function isConstructorFunction(sample: likenessCreator): boolean {
@@ -24,7 +24,7 @@ function createInstanceOf<T>(sample: any): T {
     try {
       return new sample();
     } catch (ex) {
-      throw new Error("Unable to create new instance: " + ex.message);
+      throw new Error('Unable to create new instance: ' + ex.message);
     }
   }
 
@@ -32,11 +32,11 @@ function createInstanceOf<T>(sample: any): T {
     try {
       instance = sample();
     } catch (ex) {
-      throw new Error("Factory function failed: " + ex.message);
+      throw new Error('Factory function failed: ' + ex.message);
     }
 
-    if (instance === null || typeof instance === "undefined") {
-      throw new Error("Factory function returned null or undefined");
+    if (instance === null || typeof instance === 'undefined') {
+      throw new Error('Factory function returned null or undefined');
     }
 
     return instance as T;
@@ -73,17 +73,15 @@ export default class ObjectBuilder<
     const likenessInstance = getLikenessInstance(this.likeness);
     const result = createInstanceOf<T>(this.likeness);
 
-    if (typeof likenessInstance === "undefined" && likenessInstance === null) {
+    if (typeof likenessInstance === 'undefined' && likenessInstance === null) {
       return result;
     }
 
-    Object.keys(likenessInstance).forEach(key => {
-      // Prefix string values
-      // tslint:disable-next-line:prefer-conditional-expression
-      if (typeof likenessInstance[key] === "string") {
-        result[key] = this.fixture.create(key);
+    Object.keys(likenessInstance).forEach((key: string | number) => {
+      if (typeof likenessInstance[key] === 'string') {
+        (result[key] as any) = this.fixture.create(key);
       } else {
-        result[key] = this.fixture.create(likenessInstance[key]);
+        (result[key] as any) = this.fixture.create(likenessInstance[key]);
       }
     });
 

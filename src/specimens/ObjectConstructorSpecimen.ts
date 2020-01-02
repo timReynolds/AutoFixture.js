@@ -1,9 +1,9 @@
-import ISpecimen from "../ISpecimen";
-import { ctorRegex, isConstructorFunctionRx } from "../regex";
+import ISpecimen from '../ISpecimen';
+import { ctorRegex, isConstructorFunctionRx } from '../regex';
 
 const getName = (typeInfo: any) => {
   const name = typeInfo.name;
-  if (typeof name === "undefined" && typeof typeInfo === "function") {
+  if (typeof name === 'undefined' && typeof typeInfo === 'function') {
     const match = typeInfo.toString().match(ctorRegex);
     if (match !== null) {
       return match[0];
@@ -21,18 +21,18 @@ export default class ObjectConstructorSpecimen<T> implements ISpecimen<T> {
 
   public handles(typeInfo: any) {
     return (
-      typeof typeInfo === "function" &&
+      typeof typeInfo === 'function' &&
       isConstructorFunctionRx.test(typeInfo.name)
     );
   }
 
-  public create(typeInfo: any, args: any) {
+  public create(typeInfo: any, _args: any) {
     try {
       return this._builderFactory()
         .like(typeInfo)
         .create();
     } catch (err) {
-      throw new Error("Unable to create instance of " + getName(typeInfo));
+      throw new Error('Unable to create instance of ' + getName(typeInfo));
     }
   }
 }

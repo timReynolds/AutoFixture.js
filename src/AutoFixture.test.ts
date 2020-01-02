@@ -1,6 +1,6 @@
-﻿import AutoFixture, { IAutoFixture } from "./AutoFixture";
+﻿import AutoFixture, { IAutoFixture } from './AutoFixture';
 
-describe("AutoFixture", () => {
+describe('AutoFixture', () => {
   const GUID_REGEX = /^[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}$/i;
 
   let fixture: IAutoFixture;
@@ -9,30 +9,30 @@ describe("AutoFixture", () => {
     fixture = new AutoFixture();
   });
 
-  test("create when given a string creates a random string prefixed by the provided string", () => {
-    const prefix = "foo";
+  test('create when given a string creates a random string prefixed by the provided string', () => {
+    const prefix = 'foo';
     expect(fixture.create(prefix)).toMatch(/foo.+/);
   });
 
-  test("create when given the String constructor creates a random string (that happens to be a GUID)", () => {
+  test('create when given the String constructor creates a random string (that happens to be a GUID)', () => {
     expect(fixture.create(String)).toMatch(GUID_REGEX);
   });
 
-  test("create when given the Number constructor creates a random number", () => {
+  test('create when given the Number constructor creates a random number', () => {
     expect(fixture.create(Number)).toEqual(expect.any(Number));
   });
 
-  test("create when given the Boolean constructor creates either true or false", () => {
+  test('create when given the Boolean constructor creates either true or false', () => {
     expect(fixture.create(Boolean)).toEqual(expect.any(Boolean));
   });
 
-  test("create when given a function uses that function to create an instance", () => {
+  test('create when given a function uses that function to create an instance', () => {
     interface ISample {
       sample: string;
     }
 
     function fooBar(): ISample {
-      return { sample: "" };
+      return { sample: '' };
     }
 
     const instance = fixture.create<ISample>(fooBar);
@@ -40,10 +40,11 @@ describe("AutoFixture", () => {
     expect(instance.sample).toBeDefined();
   });
 
-  [["null", null], ["undefined", undefined]].forEach(testCase => {
-    it(`create when given a function that returns ${
-      testCase[0]
-    } throws an error`, () => {
+  [
+    ['null', null],
+    ['undefined', undefined],
+  ].forEach(testCase => {
+    it(`create when given a function that returns ${testCase[0]} throws an error`, () => {
       function fooBar() {
         return testCase[1];
       }
@@ -53,16 +54,16 @@ describe("AutoFixture", () => {
     });
   });
 
-  it("create when given a constructor function that fails throws an error", () => {
+  it('create when given a constructor function that fails throws an error', () => {
     function FooBar() {
-      throw new Error("Failed!");
+      throw new Error('Failed!');
     }
     expect(() => {
       fixture.create(FooBar);
     }).toThrowError(/Unable to create instance of FooBar/i);
   });
 
-  it("create when given the Boolean constructor generates a random true or false value", () => {
+  it('create when given the Boolean constructor generates a random true or false value', () => {
     const dict: {
       [index: number]: boolean;
     } = {};
@@ -95,14 +96,14 @@ describe("AutoFixture", () => {
     });
   });
 
-  it("creates a random number when given a seed number (multiplier)", () => {
+  it('creates a random number when given a seed number (multiplier)', () => {
     const seed = 123;
     const num = fixture.create(seed);
     expect(num).toBeGreaterThanOrEqual(0);
     expect(num).toBeLessThan(seed);
   });
 
-  it("creates an object using the constructor function when passed a constructor function", () => {
+  it('creates an object using the constructor function when passed a constructor function', () => {
     interface IMyObjectType {
       prop1: string;
       prop2: string;
@@ -111,17 +112,17 @@ describe("AutoFixture", () => {
     }
 
     function MyObjectType(this: IMyObjectType) {
-      this.prop1 = "";
-      this.prop2 = "";
+      this.prop1 = '';
+      this.prop2 = '';
       this.prop3 = 0;
       this.prop4 = false;
     }
 
-    const obj = fixture.create(MyObjectType);
-    expect(obj.constructor.name).toEqual("MyObjectType");
+    const obj = fixture.create<any>(MyObjectType);
+    expect(obj.constructor.name).toEqual('MyObjectType');
   });
 
-  it("creates an object with the same properties as the expected type with random values assigned to them", () => {
+  it('creates an object with the same properties as the expected type with random values assigned to them', () => {
     interface IMyObjectType {
       prop1: string;
       prop2: string;
@@ -130,8 +131,8 @@ describe("AutoFixture", () => {
     }
 
     function MyObjectType(this: IMyObjectType) {
-      this.prop1 = "";
-      this.prop2 = "";
+      this.prop1 = '';
+      this.prop2 = '';
       this.prop3 = 0;
       this.prop4 = false;
     }
@@ -149,7 +150,7 @@ describe("AutoFixture", () => {
     [10, 0, 10],
     [50, 0, 50],
     [100, 0, 100],
-    [1000, 0, 1000]
+    [1000, 0, 1000],
   ].forEach(testCase => {
     it(`create when given the Number constructor accepts a positive multiplier ({0})`, () => {
       const multiplier = testCase[0];
@@ -175,8 +176,8 @@ describe("AutoFixture", () => {
     });
   });
 
-  describe("createMany", () => {
-    it("creates on average the expected number of instances", () => {
+  describe('createMany', () => {
+    it('creates on average the expected number of instances', () => {
       const COUNT = 2000;
       const MIN = 3; // must change with implementation
       const MAX = 10; // must change with implementation
@@ -201,7 +202,7 @@ describe("AutoFixture", () => {
       expect(average).toBeLessThanOrEqual(1.05 * expectedAverage);
     });
 
-    it("Create the number requested when provided", () => {
+    it('Create the number requested when provided', () => {
       const COUNT = 125;
 
       const result = fixture.createMany(String, COUNT);
@@ -217,11 +218,9 @@ describe("AutoFixture", () => {
     [10, 0, 10],
     [50, 0, 50],
     [100, 0, 100],
-    [1000, 0, 1000]
+    [1000, 0, 1000],
   ].forEach(testCase => {
-    it(`create when given a positive seed number (${
-      testCase[0]
-    }) treats it as a positive multiplier`, () => {
+    it(`create when given a positive seed number (${testCase[0]}) treats it as a positive multiplier`, () => {
       const seed = testCase[0];
       const min = testCase[1];
       const max = testCase[2];
@@ -252,11 +251,9 @@ describe("AutoFixture", () => {
     [-10, -10, 0],
     [-50, -50, 0],
     [-100, -100, 0],
-    [-1000, -1000, 0]
+    [-1000, -1000, 0],
   ].forEach(testCase => {
-    it(`create when given the Number constructor accepts a negative multiplier (${
-      testCase[0]
-    })`, () => {
+    it(`create when given the Number constructor accepts a negative multiplier (${testCase[0]})`, () => {
       const multiplier = testCase[0];
       const min = testCase[1];
       const max = testCase[2];
@@ -288,11 +285,9 @@ describe("AutoFixture", () => {
     [-10, -10, 0],
     [-50, -50, 0],
     [-100, -100, 0],
-    [-1000, -1000, 0]
+    [-1000, -1000, 0],
   ].forEach(testCase => {
-    it(`create when given a negative seed number (${
-      testCase[0]
-    }) treats it as a negative multiplier"`, () => {
+    it(`create when given a negative seed number (${testCase[0]}) treats it as a negative multiplier"`, () => {
       const seed = testCase[0];
       const min = testCase[1];
       const max = testCase[2];
@@ -321,30 +316,28 @@ describe("AutoFixture", () => {
       () => {
         return fixture.create(String);
       },
-      "String Constructor"
+      'String Constructor',
     ],
     [
       () => {
-        return fixture.create("prefix");
+        return fixture.create('prefix');
       },
-      "string prefix"
+      'string prefix',
     ],
     [
       () => {
         return fixture.create(Number);
       },
-      "Number Constructor"
+      'Number Constructor',
     ],
     [
       () => {
         return fixture.create(123);
       },
-      "seeded number"
-    ]
+      'seeded number',
+    ],
   ].forEach(testCase => {
-    it(`create with ${
-      testCase[1]
-    } does not return the same value when called multiple times`, () => {
+    it(`create with ${testCase[1]} does not return the same value when called multiple times`, () => {
       const factory = testCase[0] as () => string;
 
       const dict: { [index: string]: boolean } = {};
@@ -352,7 +345,7 @@ describe("AutoFixture", () => {
 
       for (let i = 0; i < 1000; ++i) {
         rand = factory();
-        if (typeof dict[rand] !== "undefined") {
+        if (typeof dict[rand] !== 'undefined') {
           throw new Error(`GUID ${rand} created multiple times`);
         }
         dict[rand] = true;

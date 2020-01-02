@@ -1,4 +1,4 @@
-import IObjectBuilder from "./IObjectBuilder";
+import IObjectBuilder from './IObjectBuilder';
 
 export default interface IAutoFixture {
   create<T>(typeInfo: any, multiplier?: number): T;
