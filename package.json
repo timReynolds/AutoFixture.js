@@ -1,6 +1,6 @@
 {
   "name": "@timreynolds/autofixture",
-  "version": "1.1.1",
+  "version": "2.0.0-0",
   "description": "JS port of the C# AutoFixture library",
   "main": "dist/index.js",
   "module": "dist/autofixture.esm.js",
